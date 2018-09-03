@@ -1,9 +1,13 @@
 
-// CanvasWidth = 465;
-  
+
+var player = document.getElementsByClassName('spartan')[0];
+
+
   function StartGame()
   {
     window.addEventListener('keydown', moveSelection);
+    detectCollisions();
+
   }
 
     function moveSelection(evt) {
@@ -24,24 +28,47 @@
     };
 
 
+    function removePX(string){
+      return parseInt(string.replace('px', ''));
+    }
       function leftArrowPressed() {
-      var element = document.getElementByClass("spartan");
-      console.log(element);
-      element.style.left = parseInt(element.style.left) - 5 + 'px';
+      player.style.left = removePX(window.getComputedStyle(player,null).getPropertyValue('left')) - 5 + 'px';
       }
 
       function rightArrowPressed() {
-      var element = document.getElementById("player");
-      element.style.left = parseInt(element.style.left) + 5 + 'px';
+      player.style.left = removePX(window.getComputedStyle(player,null).getPropertyValue('left')) + 5 + 'px';
 
       }
 
       function upArrowPressed() {
-      var element = document.getElementById("player");
-      element.style.top = parseInt(element.style.top) - 5 + 'px';
+      player.style.top = removePX(window.getComputedStyle(player,null).getPropertyValue('top')) - 5 + 'px';
       }
 
       function downArrowPressed() {
-      var element = document.getElementById("player");
-      element.style.top = parseInt(element.style.top) + 5 + 'px';
+      player.style.top = removePX(window.getComputedStyle(player,null).getPropertyValue('top')) + 5 + 'px';
       }
+
+
+
+
+function detectCollisions() {
+  var playerWidth = player.offsetWidth;
+	var playerHeight = player.offsetHeight;
+	var playerX = player.offsetLeft;
+	var playerY = player.offsetTop;
+	token1Width = token1.offsetWidth;
+	token1Height = token1.offsetHeight;
+	tokenX = token1.offsetLeft;
+	tokenY = token1.offsetTop;
+
+
+  if((playerX+playerWidth) > tokenX && playerX < (tokenX+token1Width) && (playerY+token1Height) > tokenY && playerY < (tokenY+token1Height)){
+    console.log("Collision detected");
+    var token2 = document.getElementById('token1');
+    		token2.style.display = "none";
+
+
+    	}
+      window.requestAnimationFrame(detectCollisions);
+
+    }
