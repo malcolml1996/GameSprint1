@@ -49,6 +49,8 @@ var player = document.getElementsByClassName('spartan')[0];
       }
 
 
+      var token = {width:token1.offsetWidth, height:player.offsetHeight, xPosition:token1.offsetLeft, yPosition: token1.offsetHeight};
+
 
 
 function detectCollisions() {
@@ -58,11 +60,16 @@ function detectCollisions() {
 	var playerY = player.offsetTop;
 	token1Width = token1.offsetWidth;
 	token1Height = token1.offsetHeight;
-	tokenX = token1.offsetLeft;
-	tokenY = token1.offsetTop;
+	token1X = token1.offsetLeft;
+	token1Y = token1.offsetTop;
+  token2Width = token1.offsetWidth;
+  token2Height = token1.offsetHeight;
+  token2X = token1.offsetLeft;
+  token2Y = token1.offsetTop;
 
 
-  if((playerX+playerWidth) > tokenX && playerX < (tokenX+token1Width) && (playerY+token1Height) > tokenY && playerY < (tokenY+token1Height)){
+
+  if((playerX+playerWidth) > token1X && playerX < (token1X+token1Width) && (playerY+token1Height) > token1Y && playerY < (token1Y+token1Height)){
     console.log("Collision detected");
     var token2 = document.getElementById('token1');
     		token2.style.display = "none";
@@ -72,3 +79,10 @@ function detectCollisions() {
       window.requestAnimationFrame(detectCollisions);
 
     }
+
+//
+//
+// function restart(){
+//
+// var x = document.getElementById("myBtn");
+//     x.addEventListener("click", location.reload(true)); }
